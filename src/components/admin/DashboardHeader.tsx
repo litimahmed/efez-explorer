@@ -1,6 +1,6 @@
-import { Bell, Menu, Search, HelpCircle, Settings, LogOut, User, Shield, Loader2, Command } from "lucide-react";
+import { Bell, Search, HelpCircle, Settings, LogOut, User, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Input } from "@/components/ui/input";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -24,11 +24,6 @@ export function DashboardHeader() {
   return (
     <header className="h-16 bg-[hsl(var(--header-background))] border-b border-[hsl(var(--header-border))] flex items-center justify-between px-4 lg:px-6 sticky top-0 z-50 shadow-[var(--shadow-header)] backdrop-blur-xl">
       <div className="flex items-center gap-4">
-        {/* Sidebar Trigger */}
-        <SidebarTrigger className="h-9 w-9 flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-sidebar-accent rounded-lg transition-all duration-200">
-          <Menu className="h-5 w-5" />
-        </SidebarTrigger>
-        
         {/* Search Bar */}
         <div className="relative hidden md:flex items-center">
           <div className="relative group">

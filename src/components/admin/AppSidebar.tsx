@@ -59,7 +59,7 @@ export function AppSidebar() {
                 <img 
                   src={toorriLogo} 
                   alt="Toorrii" 
-                  className={`object-contain transition-all duration-300 ease-in-out ${open ? "h-10 w-auto" : "h-8 w-8"}`}
+                  className={`object-contain transition-all duration-300 ease-in-out ${open ? "h-14 w-auto" : "h-10 w-10"}`}
                 />
               </div>
               {open && (
