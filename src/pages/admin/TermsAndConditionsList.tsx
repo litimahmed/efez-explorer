@@ -12,6 +12,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { TableSkeleton } from "@/components/admin/TableSkeleton";
 
 export default function TermsAndConditionsList() {
   const navigate = useNavigate();
@@ -143,9 +144,7 @@ export default function TermsAndConditionsList() {
         </CardHeader>
         <CardContent className="p-0">
           {isLoading ? (
-            <div className="flex items-center justify-center py-16">
-              <p className="text-muted-foreground">Chargement...</p>
-            </div>
+            <TableSkeleton columns={5} rows={4} showAvatar={true} />
           ) : !termsAndConditions || termsAndConditions.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-16 space-y-6">
               <div className="rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 p-8 ring-1 ring-primary/20">

@@ -13,11 +13,8 @@ import {
   FolderTree,
   Edit,
   Plus,
-  Loader2,
   Trash2,
   ArrowLeft,
-  Calendar,
-  Hash,
   ArrowUpDown,
   Search,
   Filter,
@@ -57,6 +54,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { format } from "date-fns";
 import { Category } from "@/types/admin/category";
+import { ListPageSkeleton } from "@/components/admin/TableSkeleton";
 
 export default function CategoryList() {
   const navigate = useNavigate();
@@ -129,11 +127,22 @@ export default function CategoryList() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="h-10 w-10 animate-spin text-primary" />
-          <p className="text-muted-foreground text-sm">Loading categories...</p>
+      <div className="space-y-6 max-w-7xl mx-auto py-8 px-4">
+        <div className="flex items-center gap-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate("/admin/dashboard")}
+            className="shrink-0 h-10 w-10 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all"
+          >
+            <ArrowLeft className="h-5 w-5" />
+          </Button>
+          <div>
+            <h2 className="text-2xl font-semibold tracking-tight">Categories</h2>
+            <p className="text-muted-foreground text-sm">Loading categories...</p>
+          </div>
         </div>
+        <ListPageSkeleton columns={8} rows={5} statCards={4} />
       </div>
     );
   }
