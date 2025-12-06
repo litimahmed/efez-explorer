@@ -50,7 +50,7 @@ export function AppSidebar() {
       className={`${open ? "w-64" : "w-16"} transition-all duration-300 border-r-0 shadow-[var(--shadow-sidebar)]`} 
       collapsible="icon"
     >
-      <SidebarContent className="bg-[hsl(var(--sidebar-background))] h-full">
+      <SidebarContent className="bg-[hsl(var(--sidebar-background))] h-full sidebar-scrollbar-auto overflow-y-auto overflow-x-hidden">
         {/* Logo Section */}
         <SidebarHeader className="border-b border-sidebar-border">
           <div className={`flex items-center justify-between ${open ? "px-3 py-3" : "px-2 py-3"} transition-all duration-300 ease-in-out`}>

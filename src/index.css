@@ -124,9 +124,9 @@
    * ===========================================
    */
   
-  /* Styles for WebKit browsers (Chrome, Safari, Edge) */
+  /* Modern minimal scrollbar for WebKit browsers (Chrome, Safari, Edge) */
   .custom-scrollbar::-webkit-scrollbar {
-    width: 8px;  /* Sets the width of the scrollbar */
+    width: 8px;
   }
   
   .custom-scrollbar::-webkit-scrollbar-track {
@@ -148,6 +148,84 @@
   .custom-scrollbar {
     scrollbar-width: thin;
     scrollbar-color: hsl(var(--primary)) hsl(var(--background));
+  }
+
+  /*
+   * ===========================================
+   * SIDEBAR SCROLLBAR - Modern & Professional
+   * Ultra-slim, auto-hiding scrollbar with smooth transitions
+   * ===========================================
+   */
+  
+  /* Sidebar scrollbar for WebKit browsers */
+  .sidebar-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    transition: width 0.2s ease;
+  }
+  
+  .sidebar-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 4px 0;
+  }
+  
+  .sidebar-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--sidebar-border));
+    border-radius: 100px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .sidebar-scrollbar:hover::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.3);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  
+  .sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+    border: 1px solid transparent;
+    background-clip: padding-box;
+  }
+  
+  .sidebar-scrollbar::-webkit-scrollbar-thumb:active {
+    background: hsl(var(--primary) / 0.6);
+  }
+
+  /* Sidebar scrollbar for Firefox */
+  .sidebar-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--sidebar-border)) transparent;
+    transition: scrollbar-color 0.2s ease;
+  }
+  
+  .sidebar-scrollbar:hover {
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+  }
+
+  /* Auto-hide scrollbar variant - appears only on hover/scroll */
+  .sidebar-scrollbar-auto::-webkit-scrollbar {
+    width: 4px;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar-scrollbar-auto::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 100px;
+    transition: background 0.3s ease;
+  }
+  
+  .sidebar-scrollbar-auto:hover::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .sidebar-scrollbar-auto:hover::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted-foreground) / 0.25);
+  }
+  
+  .sidebar-scrollbar-auto::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.4);
   }
 
   /*
