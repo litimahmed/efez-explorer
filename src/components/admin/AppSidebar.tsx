@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { LayoutDashboard, Users, Settings, BarChart3, Zap, FileText, ChevronDown, Info, Phone, Handshake, Eye, Plus, Layers, Shield, Ban, FolderTree, Briefcase, UserCog } from "lucide-react";
+import { useState, useCallback, useMemo } from "react";
+import { LayoutDashboard, Users, Settings, BarChart3, FileText, ChevronDown, Info, Phone, Handshake, Eye, Plus, Layers, Shield, Ban, FolderTree, Briefcase, UserCog, PanelLeftClose, PanelLeft } from "lucide-react";
+import toorriLogo from "@/assets/toorrii-logo.png";
 import { useContacts } from "@/hooks/admin/useContacts";
 import { NavLink } from "@/components/admin/NavLink";
 import { useLocation } from "react-router-dom";
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarFooter, useSidebar } from "@/components/ui/sidebar";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarFooter, SidebarHeader, useSidebar } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 const mainItems = [
@@ -14,12 +17,13 @@ const mainItems = [
 ];
 
 export function AppSidebar() {
-  const { open } = useSidebar();
+  const { open, toggleSidebar, state } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
   const { contact } = useContacts();
-  const isActive = (path: string) => currentPath === path;
-  const isPathStartsWith = (path: string) => currentPath.startsWith(path);
+  
+  const isActive = useCallback((path: string) => currentPath === path, [currentPath]);
+  const isPathStartsWith = useCallback((path: string) => currentPath.startsWith(path), [currentPath]);
   
   const isContentActive = isPathStartsWith("/admin/about-us") || isPathStartsWith("/admin/contacts") || isPathStartsWith("/admin/partners") || isPathStartsWith("/admin/terms") || isPathStartsWith("/admin/privacy-policy");
   const isAboutUsActive = isPathStartsWith("/admin/about-us");
@@ -48,22 +52,63 @@ export function AppSidebar() {
     >
       <SidebarContent className="bg-[hsl(var(--sidebar-background))] h-full">
         {/* Logo Section */}
-        <div className={`${open ? "px-5 py-5" : "px-3 py-5"} transition-all duration-300`}>
-          <div className={`flex items-center ${open ? "gap-3" : "justify-center"}`}>
-            <div className="relative flex-shrink-0">
-              <div className="absolute inset-0 bg-primary/20 blur-lg rounded-full scale-150" />
-              <div className="relative bg-primary p-2 rounded-xl shadow-lg shadow-primary/20">
-                <Zap className="h-5 w-5 text-primary-foreground" />
+        <SidebarHeader className="border-b border-sidebar-border">
+          <div className={`flex items-center justify-between ${open ? "px-3 py-3" : "px-2 py-3"} transition-all duration-300 ease-in-out`}>
+            <div className={`flex items-center ${open ? "gap-3" : "justify-center w-full"} overflow-hidden`}>
+              <div className="relative flex-shrink-0">
+                <img 
+                  src={toorriLogo} 
+                  alt="Toorrii" 
+                  className={`object-contain transition-all duration-300 ease-in-out ${open ? "h-10 w-auto" : "h-8 w-8"}`}
+                />
               </div>
+              {open && (
+                <div className="flex flex-col min-w-0 animate-fade-in">
+                  <h1 className="text-lg font-bold text-foreground tracking-tight truncate">Toorrii</h1>
+                  <span className="text-[11px] text-muted-foreground font-medium -mt-0.5 truncate">Admin Portal</span>
+                </div>
+              )}
             </div>
             {open && (
-              <div className="flex flex-col">
-                <h1 className="text-lg font-bold text-foreground tracking-tight">Toorrii</h1>
-                <span className="text-[11px] text-muted-foreground font-medium -mt-0.5">Admin Portal</span>
-              </div>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleSidebar}
+                    className="h-8 w-8 flex-shrink-0 text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors"
+                    aria-label="Collapse sidebar"
+                  >
+                    <PanelLeftClose className="h-4 w-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="right" sideOffset={8}>
+                  <p>Collapse sidebar</p>
+                </TooltipContent>
+              </Tooltip>
             )}
           </div>
-        </div>
+          {!open && (
+            <div className="px-2 pb-2">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onClick={toggleSidebar}
+                    className="h-8 w-full text-muted-foreground hover:text-foreground hover:bg-sidebar-accent transition-colors"
+                    aria-label="Expand sidebar"
+                  >
+                    <PanelLeft className="h-4 w-4" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="right" sideOffset={8}>
+                  <p>Expand sidebar</p>
+                </TooltipContent>
+              </Tooltip>
+            </div>
+          )}
+        </SidebarHeader>
 
         {/* Main Navigation Section */}
         <SidebarGroup className="px-3 py-2">
