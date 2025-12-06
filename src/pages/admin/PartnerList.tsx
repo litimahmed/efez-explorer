@@ -12,8 +12,7 @@ import {
   Phone,
   ArrowLeft,
   CheckCircle,
-  XCircle,
-  Users
+  XCircle
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -36,6 +35,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { format } from "date-fns";
 import { getMultilingualValue, PartnerResponse } from "@/types/admin/partner";
+import { TableSkeleton } from "@/components/admin/TableSkeleton";
 
 export default function PartnerList() {
   const navigate = useNavigate();
@@ -172,9 +172,7 @@ export default function PartnerList() {
           </CardHeader>
           <CardContent className="p-0">
             {loading ? (
-              <div className="flex items-center justify-center py-16">
-                <p className="text-muted-foreground">Chargement...</p>
-              </div>
+              <TableSkeleton columns={6} rows={4} showAvatar={true} />
             ) : !partners || partners.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-16 space-y-6">
                 <div className="rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 p-8 ring-1 ring-primary/20">

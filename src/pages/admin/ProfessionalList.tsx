@@ -27,6 +27,7 @@ import {
   useActivateProfessional,
   useDeactivateProfessional,
 } from "@/hooks/admin/useProfessionals";
+import { TableSkeleton } from "@/components/admin/TableSkeleton";
 
 const ProfessionalList = () => {
   const navigate = useNavigate();
@@ -59,7 +60,7 @@ const ProfessionalList = () => {
     deactivateMutation.mutate(id);
   };
 
-  // Show loading state without skeleton
+  // Show loading state with skeleton
   if (isLoading) {
     return (
       <div className="space-y-6 max-w-7xl mx-auto py-8 px-4">
@@ -78,8 +79,14 @@ const ProfessionalList = () => {
           </div>
         </div>
         <Card className="shadow-elegant border-0">
-          <CardContent className="flex items-center justify-center py-16">
-            <p className="text-muted-foreground">Chargement...</p>
+          <CardHeader className="border-b border-border/50 bg-muted/30">
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <Users className="h-5 w-5 text-primary" />
+              Liste des Professionnels
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-0">
+            <TableSkeleton columns={6} rows={5} showAvatar={true} />
           </CardContent>
         </Card>
       </div>
